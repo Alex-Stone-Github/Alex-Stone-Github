@@ -1,1 +1,1 @@
-I use Arch Linux, btw, so I am really sorry if my projects do not work on your operating system.
+I switch between a bunch of different operating systems. As a rusult, I am sorry if some of the code I write is not compatible with your system.
