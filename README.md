@@ -2,7 +2,7 @@
 
 ---
 ## About Me
-I am Alex Stone, I am 14 years old, and I like to code. Here I think is a easy place for me to put some of the projects that I am working on I feel would be beneficial to share with the world. 
+I am Alex Stone, I am 15 years old, and I like to code. Here I think is a easy place for me to put some of the projects that I am working on I feel would be beneficial to share with the world. 
 
 ## Interest
 I do not like to give out to much information, but I do have a lot of interest in computers. Here are some of the things I am interested in that relate back to computers:
