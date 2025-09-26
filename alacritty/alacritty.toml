@@ -1,0 +1,8 @@
+[window]
+opacity = 0.8
+[terminal.shell]
+program = "zsh"
+[font]
+normal = {family = "0xProto Nerd Font", style = "Regular"}
+
+[terminal]
