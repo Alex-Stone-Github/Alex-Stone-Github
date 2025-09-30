@@ -22,6 +22,8 @@ mapit("n", "<s-j>", "<c-w>j");
 mapit("n", "<s-k>", "<c-w>k");
 mapit("n", "<s-h>", "<c-w>h");
 mapit("n", "<s-l>", "<c-w>l");
+-- Coc Complete, special because of the lua evaluation
+vim.api.nvim_set_keymap('i', '<cr>', 'coc#pum#visible() ? coc#pum#confirm() : "\\<cr>"', {silent = true, expr = true})
 
 
 -- -----
