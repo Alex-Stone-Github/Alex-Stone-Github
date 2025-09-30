@@ -59,7 +59,7 @@ require("lazy").setup({
 			dependencies = {"nvim-tree/nvim-web-devicons"},
 		},
 	},
-	install = { colorscheme = { "gruvbox" } },
+	install = { colorscheme = { "gruvbox-material" } },
 	checker = { enabled = true },
 })
 
