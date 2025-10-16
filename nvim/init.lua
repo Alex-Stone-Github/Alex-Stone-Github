@@ -66,7 +66,8 @@ mapit("n", "<s-h>", "<c-w>h");
 mapit("n", "<s-l>", "<c-w>l");
 teles = require("telescope.builtin")
 mapit('n', '<C-o>', ':lua teles.find_files()<cr>') -- Open a file  "Ctr + O"
-mapit('n', '<C-p>', ':NvimTreeToggle<cr>')
+mapit('n', '<C-p>', ':NvimTreeToggle<cr>')         -- Toggle file tree
+mapit('n', '<C-j>', ':new<cr>')                    -- Scratchpad stuff
 -- reserve c-m for drawing
 
 --- ---------------------------------------------
