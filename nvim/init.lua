@@ -85,12 +85,7 @@ require("nvim-tree").setup()
 
 -- Documentation Lookup
 vim.keymap.set('n', '<C-I>', function() 
-	if is_floating_window_open() then
-		local buffer
-		print("Window already open")
-	else
-		vim.fn.CocActionAsync("doHover")
-	end
+	vim.fn.CocActionAsync("doHover")
 end, {silent = true})
 
 
