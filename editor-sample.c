@@ -25,5 +25,7 @@ int main() {
 	// Define Garbage
 	struct IWriter writer;
 
+	struct IWriter[2] writers = {writer, writer};
+
 	return 0;
 }
