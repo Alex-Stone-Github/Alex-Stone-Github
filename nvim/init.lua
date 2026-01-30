@@ -1,93 +1,48 @@
--- -------------------------
--- PART A: Plugins and stuff
--- -------------------------
--- Bootstrap lazy.nvim
-local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-if not (vim.uv or vim.loop).fs_stat(lazypath) then
-  print("Insalling lazy nvim")
-  local lazyrepo = "https://github.com/folke/lazy.nvim.git"
-  local out = vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath })
-  if vim.v.shell_error ~= 0 then
-    vim.api.nvim_echo({
-      { "Failed to clone lazy.nvim:\n", "ErrorMsg" },
-      { out, "WarningMsg" },
-      { "\nPress any key to exit..." },
-    }, true, {})
-    vim.fn.getchar()
-    os.exit(1)
-  end
-end
-vim.opt.rtp:prepend(lazypath)
-
--- actual plugin list
-require("lazy").setup({
-	spec = {
-		{"ellisonleao/gruvbox.nvim"},                   -- Looks
-		{"sainnhe/gruvbox-material"},                   -- Looks
-		{"nvim-lualine/lualine.nvim",                   -- Looks: Status Bar
-
-		{"nvim-telescope/telescope.nvim"},              -- Fuzzy Find
-		{"tpope/vim-fugitive"},                         -- Git Integration
-		{"neoclide/coc.nvim", branch="release"},        -- Autocomplete LSP Protocol Impl
-			dependencies = {"nvim-tree/nvim-web-devicons"},
-		},
-		{"nvim-tree/nvim-tree.lua",                     -- File Explorer
-			dependencies = {"nvim-tree/nvim-web-devicons"},
-		},
-	},
-	install = { colorscheme = { "gruvbox-material" } },
-	checker = { enabled = true },
+-- What plugins are needed?
+vim.pack.add({
+	{src = "https://github.com/ellisonleao/gruvbox.nvim"},               -- Theme
+	{src = "https://github.com/sainnhe/gruvbox-material"},               -- Theme
+	{src = "https://github.com/nvim-lualine/lualine.nvim"},              -- Status Bar
+	{src = "https://github.com/nvim-telescope/telescope.nvim"},          -- Fuzzy File Finder
+	{src = "https://github.com/nvim-lua/plenary.nvim"},                  -- Telescope Dependency
+	{src = "https://github.com/tpope/vim-fugitive"},                     -- Git
+	{src = "https://github.com/neoclide/coc.nvim", version = "release"}, -- Completion
+	{src = "https://github.com/nvim-tree/nvim-tree.lua"},                -- File Explorer
+	{src = "https://github.com/nvim-tree/nvim-web-devicons"},            -- File Explorer Icons
 })
-
--- ---------------------
--- PART B: Configuration 
--- ---------------------
--- Core Settings
+-- How am I going to configure everything?
 vim.g.mapleader = ';';
 vim.g.maplocalleader = '\\';
 vim.opt.number = true
 vim.opt.mouse = 'a'
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
--- Gotta love tabs
 vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
-vim.opt.expandtab = false -- Color Scheme
+vim.opt.expandtab = false
 
--- Keymaps
+require("lualine").setup{
+	options = { theme = 'gruvbox' }
+}
+require("nvim-tree").setup()
+
+vim.cmd[[colo gruvbox]]
+
+-- What are my prefered keymaps to actually use the program?
 local mapit = function(mode, key, callee)
 	vim.api.nvim_set_keymap(
 	mode, key, callee, 
 	{noremap = true, silent = true})
 end
-mapit("n", "<s-j>", "<c-w>j");                     -- Pane Navigation Shift + "hjkl"
+mapit("n", "<s-j>", "<c-w>j");                     -- Pane Navigation "Shift + hjkl"
 mapit("n", "<s-k>", "<c-w>k");
 mapit("n", "<s-h>", "<c-w>h");
 mapit("n", "<s-l>", "<c-w>l");
-teles = require("telescope.builtin")
-mapit('n', '<C-o>', ':lua teles.find_files()<cr>') -- Open a file  "Ctr + O"
-mapit('n', '<C-p>', ':NvimTreeToggle<cr>')         -- Toggle file tree
-mapit('n', '<C-j>', ':new<cr>')                    -- Scratchpad stuff
--- reserve c-m for drawing
 
---- ---------------------------------------------
---- PART C: Special Plugin Stuff & Initialization
---- ---------------------------------------------
--- colorscheme
-vim.cmd [[colo gruvbox-material]]
--- status bar
-require("lualine").setup{
-	options = { theme = 'gruvbox' }
-}
--- Coc Complete, special because of the lua evaluation
-vim.api.nvim_set_keymap('i', '<cr>', 'coc#pum#visible() ? coc#pum#confirm() : "\\<cr>"', {silent = true, expr = true})
--- file explorer
-require("nvim-tree").setup()
-
--- Documentation Lookup
-vim.keymap.set('n', '<C-I>', function() 
-	vim.fn.CocActionAsync("doHover")
-end, {silent = true})
-
-
-
+mapit('n', '<C-j>', ':new<cr>')                              -- Daily Scratchpad 
+mapit('n', '<C-p>', ':new ~/.config/nvim/init.lua<cr>')      -- Daily Scratchpad 
+mapit('n', '<C-m>', ':tab terminal<cr>')                     -- Daily Scratchpad 
+mapit("n", "<C-o>",                                          -- File Finder "Ctr + O"
+	":lua require('telescope.builtin').find_files()<cr>")
+vim.api.nvim_set_keymap('i', '<cr>',                         -- Completion
+	'coc#pum#visible() ? coc#pum#confirm() : "\\<cr>"', {silent = true, expr = true})
