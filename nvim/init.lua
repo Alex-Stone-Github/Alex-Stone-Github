@@ -10,7 +10,7 @@ vim.pack.add({
 	{src = "https://github.com/nvim-tree/nvim-tree.lua"},                -- File Explorer
 	{src = "https://github.com/nvim-tree/nvim-web-devicons"},            -- File Explorer Icons
 })
--- How am I going to configure everything?
+-- What are my basic settings?
 vim.g.mapleader = ';';
 vim.g.maplocalleader = '\\';
 vim.opt.number = true
@@ -28,7 +28,7 @@ require("nvim-tree").setup()
 
 vim.cmd[[colo gruvbox]]
 
--- What are my prefered keymaps to actually use the program?
+-- What are my prefered keymaps?
 local mapit = function(mode, key, callee)
 	vim.api.nvim_set_keymap(
 	mode, key, callee, 
