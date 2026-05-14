@@ -15,20 +15,24 @@ vim.pack.add({
 -- ---------------
 -- Basic Config --
 -- ---------------
-vim.g.mapleader = ';';
+vim.g.mapleader = ";";
 vim.g.maplocalleader = '\\';
 vim.opt.number = true
-vim.opt.mouse = 'a'
+vim.opt.mouse = "a"
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
 vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.expandtab = false
 
+vim.o.termguicolors = true
+vim.o.background = "dark";
+
 -- plugin config
 teles = require("telescope.builtin")
+vim.cmd([[colo gruvbox]])
 require("lualine").setup{
-	options = { theme = 'gruvbox' }
+	options = { theme = "gruvbox" }
 }
 
 -- Keymaps
@@ -41,8 +45,8 @@ mapit("n", "<s-j>", "<c-w>j");
 mapit("n", "<s-k>", "<c-w>k");
 mapit("n", "<s-h>", "<c-w>h");
 mapit("n", "<s-l>", "<c-w>l");
-mapit('n', '<C-o>', ':lua teles.find_files()<cr>')
-vim.api.nvim_set_keymap('i', '<cr>', 'pumvisible() ? "\\<c-y>" : "\\<cr>"', {
+mapit("n", "<C-o>", ":lua teles.find_files()<cr>")
+vim.api.nvim_set_keymap("i", "<cr>", "pumvisible() ? '\\<c-y>' : '\\<cr>'", {
 	expr = true,
 	noremap = true
 });
