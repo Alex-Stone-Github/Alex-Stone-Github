@@ -1,4 +1,6 @@
+#include <math.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 struct ExampleThing {
 	void* data;
@@ -24,8 +26,10 @@ int main() {
 
 	// Define Garbage
 	struct IWriter writer;
-
-	struct IWriter[2] writers = {writer, writer};
+	struct IWriter writers[2] = {writer, writer};
+	struct IWriter writerthing; 
 
 	return 0;
 }
+
+

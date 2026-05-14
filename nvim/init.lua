@@ -26,7 +26,7 @@ vim.opt.shiftwidth = 4
 vim.opt.expandtab = false
 
 vim.o.termguicolors = true
-vim.o.background = "dark";
+vim.o.background = "dark"
 
 -- plugin config
 teles = require("telescope.builtin")
@@ -46,7 +46,8 @@ mapit("n", "<s-k>", "<c-w>k");
 mapit("n", "<s-h>", "<c-w>h");
 mapit("n", "<s-l>", "<c-w>l");
 mapit("n", "<C-o>", ":lua teles.find_files()<cr>")
-vim.api.nvim_set_keymap("i", "<cr>", "pumvisible() ? '\\<c-y>' : '\\<cr>'", {
+vim.api.nvim_set_keymap("i", "<cr>", "coc#pum#visible() ? coc#pum#confirm() : '<cr>'", {
 	expr = true,
 	noremap = true
 });
+
