@@ -1,6 +1,9 @@
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdint.h>
+
+uint32_t square(uint32_t x);
 
 struct ExampleThing {
 	void* data;
@@ -29,7 +32,13 @@ int main() {
 	struct IWriter writers[2] = {writer, writer};
 	struct IWriter writerthing; 
 
+	int discard = square(3);
+
 	return 0;
 }
 
 
+uint32_t square(uint32_t x) {
+	uint32_t root = sqrt(x);
+	return root * root * x;
+}

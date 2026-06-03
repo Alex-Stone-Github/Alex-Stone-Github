@@ -1,11 +1,14 @@
-.PHONY: install install-vim-config install-zsh-config install-alacritty-config install-nerdfont-proto
+.PHONY: install install-all install-vim-config install-zsh-config install-alacritty-config install-nerdfont-proto
 
-install: install-vim-config install-zsh-config install-alacritty-config install-tmux-config
+install: install-vim-config install-zsh-config install-tmux-config
+
+install-all: install install-alacritty-config 
 
 install-vim:
 	@echo "Installing new neovim configuration!"
 	-mkdir ~/.config/nvim
 	cp ./nvim/init.lua ~/.config/nvim/init.lua
+	cp ./nvim/coc-settings.json ~/.config/nvim/coc-settings.json
 	@echo "Successfully installed neovim configuration!"
 
 install-zsh-config:

@@ -1,0 +1,13 @@
+{
+	"inlayHint.enable": false,
+	"languageserver": {
+		"zls": {
+			"command": "zls",
+			"filetypes": ["zig"],
+			"rootPatterns": ["zls.json", "build.zig", ".git"],
+			"initializationOptions": {
+				"enable_semantic_tokens": true
+			}
+		}
+	}
+}
