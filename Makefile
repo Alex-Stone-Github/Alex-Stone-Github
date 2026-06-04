@@ -4,7 +4,7 @@ install: install-vim-config install-zsh-config install-tmux-config
 
 install-all: install install-alacritty-config 
 
-install-vim:
+install-vim-config:
 	@echo "Installing new neovim configuration!"
 	-mkdir ~/.config/nvim
 	cp ./nvim/init.lua ~/.config/nvim/init.lua

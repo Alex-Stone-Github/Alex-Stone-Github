@@ -24,6 +24,7 @@ vim.opt.smartcase = true
 vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.expandtab = false
+vim.opt.colorcolumn = "80"
 
 vim.o.termguicolors = true
 vim.o.background = "dark"
