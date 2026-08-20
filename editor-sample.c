@@ -16,6 +16,8 @@ struct IWriter {
 	void (*write)(void* ctx, char const* data, size_t count);
 };
 
+typedef struct { int a; } nothing_t;
+
 int main() {
 	for (int i = 0; i < 10; i ++) {
 		printf("Hello, World!\n");
