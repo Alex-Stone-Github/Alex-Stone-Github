@@ -1,8 +1,6 @@
-.PHONY: install install-all install-vim-config install-zsh-config install-alacritty-config install-nerdfont-proto
+.PHONY: install install-all install-vim-config install-zsh-config install-alacritty-config install-nerdfont-proto install-emacs-config
 
-install: install-vim-config install-zsh-config install-tmux-config
-
-install-all: install install-alacritty-config 
+install: install-vim-config install-zsh-config install-tmux-config install-alacritty-config install-emacs-config
 
 install-vim-config:
 	@echo "Installing new neovim configuration!"
@@ -27,10 +25,17 @@ install-alacritty-config: install-nerdfont-proto
 	cp alacritty/alacritty.toml ~/.config/alacritty/
 	@echo "Successfully alacritty configuration!"
 
+install-emacs-config:
+	@echo "Installing emacs configuration!"
+	-mkdir ~/.config/emacs
+	cp emacs/init.el ~/.config/emacs/
+	@echo "Successfully emacs configuration!"
+
 install-nerdfont-proto:
 	@echo "Installing 0xProto Nerdfont!"
 	-mkdir ~/.local/share/fonts
 	unzip -n 0xProto.zip -d ~/.local/share/fonts
 	@echo "Successfully Install 0xProto Nerdfont!"
 	fc-cache -fv
+
 

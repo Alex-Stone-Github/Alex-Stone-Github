@@ -1,6 +1,7 @@
 { config, pkgs, ... }:
 
 {
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
   imports =
     [
       ./hardware-configuration.nix
@@ -67,9 +68,19 @@
 
   # Firefox here for some reason?
   programs.firefox.enable = true;
+  services.gnome.gnome-keyring.enable = true;
 
   # Packages
   nixpkgs.config.allowUnfree = true;
+  programs.nix-ld.enable = true;
+  programs.nix-ld.libraries = with pkgs; [
+	  stdenv.cc.cc
+	  zlib
+	  glib
+	  libGL
+	  xorg.libX11
+	  xorg.libxcb
+  ];
   fonts.packages = with pkgs; [
     noto-fonts
     noto-fonts-color-emoji
@@ -81,22 +92,49 @@
     gnome-tweaks
     adwaita-icon-theme
     chromium
-    # Tooling
+    freecad
+    blender
+    alacritty
+
+    # Passwords
+    openssl
+    libsecret
+    gnupg
+
+    # Code Editing
     neovim
     emacs
     tmux
     git
     ripgrep
     htop
+    fastfetch
+
     # Languages
+    kotlin
+    kotlin-native
+    gradle
+    maven
+    jdk
+    kotlin-language-server
+
+    nodejs
+
     rustc
     cargo
     rust-analyzer
-    python3
+
+    uv
     pyright
+
     zig
     zls
+
     clang-tools
+    pkg-config
+    cmake
+    gnumake
+    meson
     gcc
   ];
 
