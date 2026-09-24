@@ -69,6 +69,12 @@
   # Firefox here for some reason?
   programs.firefox.enable = true;
   services.gnome.gnome-keyring.enable = true;
+  programs.steam = {
+	  enable = true;
+	  remotePlay.openFirewall = true;
+	  dedicatedServer.openFirewall = true;
+	  localNetworkGameTransfers.openFirewall = true;
+  };
 
   # Packages
   nixpkgs.config.allowUnfree = true;
@@ -93,15 +99,13 @@
     adwaita-icon-theme
     chromium
     freecad
+    kicad
     blender
     alacritty
 
-    # Passwords
+    # Code Editing / Utilities
     openssl
-    libsecret
     gnupg
-
-    # Code Editing
     neovim
     emacs
     tmux
@@ -109,6 +113,9 @@
     ripgrep
     htop
     fastfetch
+    zsh
+    zip
+    unzip
 
     # Languages
     kotlin
@@ -125,6 +132,7 @@
     rust-analyzer
 
     uv
+    python3
     pyright
 
     zig

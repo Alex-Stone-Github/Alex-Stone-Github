@@ -1,6 +1,6 @@
-.PHONY: install install-all install-vim-config install-zsh-config install-alacritty-config install-nerdfont-proto install-emacs-config
+.PHONY: install install-all install-vim-config install-zsh-config install-nerdfont-proto install-emacs-config
 
-install: install-vim-config install-zsh-config install-tmux-config install-alacritty-config install-emacs-config
+install: install-vim-config install-zsh-config install-tmux-config install-emacs-config
 
 install-vim-config:
 	@echo "Installing new neovim configuration!"
