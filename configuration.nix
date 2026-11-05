@@ -84,6 +84,11 @@
 	  zlib
 	  glib
 	  libGL
+
+	  libva
+	  libv4l
+	  ffmpeg
+
 	  xorg.libX11
 	  xorg.libxcb
   ];
@@ -124,6 +129,9 @@
     maven
     jdk
     kotlin-language-server
+
+    typst
+    tinymist
 
     nodejs
 

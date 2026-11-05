@@ -1,6 +1,7 @@
 ; Initialize package repos
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
+(add-to-list 'package-archives '("nongnu" . "https://elpa.nongnu.org/nongnu/") t)
 (package-initialize)
 (unless package-archive-contents
   (package-refresh-contents))
@@ -19,22 +20,48 @@
     :config (load-theme 'gruvbox-dark-medium t))
 
 ; LSP Client
+(use-package typst-ts-mode
+  :ensure t
+  :mode "\\.typ\\'"
+  :config
+  (add-hook 'typst-ts-mode-hook #'typst-ts-watch-mode)
+  (with-eval-after-load 'treesit
+    (add-to-list 'treesit-language-source-alist
+      '(typst "https://github.com"))))
+(use-package zig-mode
+  :ensure t
+  :hook (zig-mode . eglot-ensure)
+  :config
+  (setq zig-format-on-save t))
+(with-eval-after-load 'eglot
+  (add-to-list 'eglot-server-programs '(zig-mode . ("zls"))))
 (use-package eglot
-  :ensure nil
+    :ensure nil
+	:demand t
     :init (setq native-comp-async-report-warnings-error 'silent)
-    :hook (
-        (python-mode . eglot-ensure)
-        (c-mode      . eglot-ensure)
-        (c++-mode    . eglot-ensure)
-        )
     :config
-    (use-package company
-        :ensure t
-        :init (global-company-mode)))
+		(add-to-list 'eglot-server-programs '(typst-ts-mode . ("tinymist" "lsp")))
+		(use-package company
+			:ensure t
+			:init (global-company-mode))
+    :hook
+        (python-ts-mode . eglot-ensure)
+        (c-ts-mode      . eglot-ensure)
+        (c++-ts-mode    . eglot-ensure)
+        (zig-ts-mode    . eglot-ensure)
+        (rust-ts-mode   . eglot-ensure)
+        (js-ts-mode     . eglot-ensure)
+		(typst-ts-mode  . eglot-ensure)
+        (typescript-ts-mode . eglot-ensure)
+        )
+(with-eval-after-load 'eglot
+  (add-to-list 'eglot-ignored-server-capabilities :inlayHintProvider))
 
-; Install and use git client magit
+
+; Magit
 (use-package magit
   :ensure t)
+
 
 ; Fuzzy file find
 (use-package vertico
@@ -54,6 +81,7 @@
 (use-package evil
 	:ensure t
 	:init
+    (setq evil-want-C-i-jump nil) ; Allow tab for org mode
 	(setq evil-want-integration t)
 	(setq evil-want-keybinding nil)
 	:config (evil-mode 1))
@@ -61,6 +89,7 @@
 	:after (evil magit)
 	:ensure t
 	:config (evil-collection-init '(dired magit)))
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; General configuration
@@ -79,9 +108,9 @@
 (global-auto-revert-mode t)
 
 ; Tab Sizes
+(setq-default indent-tabs-mode nil)
 (setq-default tab-width 4)
 (setq-default c-basic-offset 4)
-(setq-default indent-tabs-mode nil)
 (setq-default python-indent-offset 4)
 (setq-default js-indent-level 4)
 (setq-default css-indent-level 4)
@@ -102,15 +131,5 @@
                     :foreground "white")
 (global-whitespace-mode 1)
 
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(package-selected-packages nil))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
+
+
