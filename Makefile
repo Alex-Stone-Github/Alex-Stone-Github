@@ -1,10 +1,10 @@
-.PHONY: install-cmdline install-all install-neovim-config install-zsh-config install-nerdfont-proto install-emacs-config install-alacritty-config noop
+.PHONY: install install-all install-neovim-config install-zsh-config install-nerdfont-proto install-emacs-config install-alacritty-config noop
 
 noop:
 
-install-cmdline: install-neovim-config install-zsh-config install-tmux-config
+install: install-neovim-config install-zsh-config install-tmux-config
 
-install-all: install-cmdline install-emacs-config install-alacritty-config
+install-all: install install-emacs-config install-alacritty-config
 
 install-neovim-config:
 	@echo "Installing neovim configuration!"
